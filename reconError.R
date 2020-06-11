@@ -1,20 +1,19 @@
 #Bootstrapping simulation to estimate prediction intervals of the reconstructed SST by: 
-#1) we used the periods 1941:1971 and 1972:2002 as independent calibration and verification intervals, respectively, 
-#2) an SST reconstruction model was developed by linear regression in the calibration interval, 
+#1) independent calibration and verification intervals are defined in period of overlap
+#2) an SST reconstruction model is developed by linear regression in the calibration interval, 
 #3) at each possible sample depth 1:n, where n is the sample depth of the year in the verification period with the fewest replicates, 
-##a) for each iteration i in 1:1000 the detrended indices in the verification period were resampled with replacement (the resampling 
-##disregards the continuity of indices such that year 1 and year 2 of a single resampling may be represented by different individuals),
-###i) resampled indices were combined by robust bi-weight mean, 
-###ii) an SST reconstruction was developed for the verification interval based on the regression coefficients from step 2, 
-###iii) each reconstruction was aligned with the instrumental SST and the difference (absolute value) was calculated between the 
-##instrumental SST and reconstructed value at each year,  
-###iv) the ascending-order 90th percentile value was stored, 
-##b) the median of all 90th percentile error values at a given sample depth is stored (error values ± reconstructed values represent 
-##the 90% confidence envelope), 
-#4) steps 2 and 3 were repeated with the calibration and verification intervals reversed, 
-#5) the mean of the 90th percentile values at each sample depth from the two calibration-verification iterations was calculated
-#6) the bootstrapped 90th percentile error was applied to the SST reconstruction as a prediction interval by direct addition to 
-#(and subtraction from) the reconstructed SSTs prior to the instrumental period ().
+##a) for each iteration i in 1:1000 
+###i) the detrended indices in the verification period are resampled with replacement (the resampling disregards the continuity of 
+###indices such that year 1 and year 2 of a single resampling may be represented by different individuals), 
+###ii) resampled indices are combined by robust bi-weight mean, 
+###iii) an SST reconstruction is developed for the verification interval based on the regression coefficients from step 2, 
+###iv) each reconstruction is aligned with the instrumental SST and the difference (absolute value) is calculated between the 
+###instrumental SST and reconstructed value at each year,  
+###v) the ascending-order 90th percentile value is stored, 
+##b) the median of all 90th percentile error values at a given sample depth is stored
+#4) steps 2 and 3 are repeated with the calibration and verification intervals reversed,
+#5) the the median 90th percentile error values at each sample depth, for both calibration-verification iterations are returned
+#6) the error can be applied as a bootstrapped prediction interval by addition to (and subtraction from) a forecast or proxy reconstruction
 
 
 ################################################################################################
